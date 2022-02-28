@@ -3,8 +3,8 @@ import java.util.HashMap;
 public class ShowSearcherApp implements IShowSearcherBackend {
 
   
-  IHashTableSortedSets<Integer,IShow> HashTableForYear = new IHashTableSortedSetsImpl<Integer, IShow>();
-  IHashTableSortedSets<String,IShow> HashTableForTitle = new IHashTableSortedSetsImpl<String,IShow>();
+  IHashTableSortedSets<Integer,IShow> HashTableForYear = new HashTableSortedSets<Integer, IShow>();
+  IHashTableSortedSets<String,IShow> HashTableForTitle = new HashTableSortedSets<String,IShow>();
   
   private HashMap<String, Boolean> HashMapForFilter = new HashMap<String, Boolean>();
   
@@ -31,7 +31,7 @@ public class ShowSearcherApp implements IShowSearcherBackend {
       HashTableForTitle.add(words[i].trim(), show);
     }
     int year = show.getYear();
-    HashTableForYear.get(year).add(show);
+    HashTableForYear.add(year, show);
   }
 
   @Override
