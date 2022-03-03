@@ -29,7 +29,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend {
 
 
   @Override
-  public void addShow(IShow show) {
+  public void addShow(Show show) {
     // add show to hashYear hash table
     int year = show.getYear();
     hashYear.add(year, show);
