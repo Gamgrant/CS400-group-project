@@ -276,26 +276,9 @@ public class ShowSearcherBackendTester {
    * the screen.
    * 
    */
-  public static boolean test10() {
-    
-    ShowSearcherBackend backend = new ShowSearcherBackend();
-    Show show1 = new Show("Get rich or die trying", 2019, 87, "Hulu");
-    Show show2 = new Show("Stinky Badger", 1192, 19, "Netflix");
-    Show show3 = new Show("Get rich or die trying", 2030, 21, "Netflix");
-
-    backend.addShow(show1);
-    backend.addShow(show2);
-    backend.addShow(show3);
-    
-    ShowSearcherFrontend testing = new ShowSearcherFrontend(backend);
-    
-    String returningString = testing.outputHelper();
-    if (!returningString.startsWith("Welcome to the Show Searcher App!")) {
+  public static boolean test10() {   
     return false;
-  } else
-    return true;
   }
-
   /*
    * test#2. testing Front end developer's code
    */
@@ -318,8 +301,7 @@ public class ShowSearcherBackendTester {
     System.out.println("Test 7 passed: " + test7());
     System.out.println("Test 8 passed: " + test8());
     System.out.println("Test 9 passed: " + test9());
-    System.out.println("Test 10 passed: " + test10());
-    System.out.println("Test 11 passed: " + test11());
+   
 
   }
 }
