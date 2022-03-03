@@ -69,6 +69,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend {
       List<IShow> unfilteredShowsByYear = hashYear.get(year);
       return Filter(unfilteredShowsByYear);
     } catch (NoSuchElementException e) {
+      System.out.println(e.getMessage());
       // just return an empty list if the provided year does not present in the hashYear hash table
       return (new ArrayList<>());
     }
