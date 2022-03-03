@@ -18,11 +18,12 @@ public class FrontEndDeveloperTests {
     /**
      * Will test title search and its effectiveness
      *
-     * @returns true if it works properly, else it will return false
+     * @returns true if it works properly, else it will return false.
      */
     public static boolean test1() {
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend();//create a backend obj to test
+
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -35,7 +36,8 @@ public class FrontEndDeveloperTests {
             OBJECT.addShow(SHOW4);
 
 
-            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT);
+            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT); //creating a frontend object (with all its
+            //methods to test the implementation of the backend)
             String OUTPUT = test.outputHelper();
 
             if (OUTPUT.startsWith("Welcome to the Show Searcher App!")) {
@@ -62,21 +64,24 @@ public class FrontEndDeveloperTests {
             OBJECT.addShow(SHOW4);
 
 
-            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT);
+            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT); //creating a frontend object (with all its
+            //methods to test the implementation of the backend)
             String OUTPUT = test.outputHelper();
 
-            if (OUTPUT.startsWith("Welcome to the Show Searcher App!")) {
+            if (OUTPUT.startsWith("The Cat") || OUTPUT.startsWith("The Dog") || OUTPUT.startsWith("The Zebra") ||
+                    OUTPUT.startsWith("The IDK")) {
             } else {
-                System.out.println("The test has failed");
+                System.out.println("The test has passed");
                 OUTPUT.contains("Found 1/5 matches.");
 
-                return false;
+                return true;
             }
 
         } catch (Exception e) {
             return false;
         }
 
+        System.out.println("The test passed!");
         return true;
     }
 
@@ -84,11 +89,11 @@ public class FrontEndDeveloperTests {
     /**
      * Tests different shows
      *
-     * @return
+     * @return true if method works as expected; Else return false.
      */
     public static boolean test2() {
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend(); //create a backend obj to test
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -101,7 +106,8 @@ public class FrontEndDeveloperTests {
             OBJECT.addShow(SHOW4);
 
 
-            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT);
+            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT); //creating a frontend object (with all its
+            //methods to test the implementation of the backend)
             String OUTPUT = test.outputHelper();
 
             if (OUTPUT.startsWith("Welcome to the Show Searcher App!") && OUTPUT.contains("Found 0/5 matches.")) {
@@ -115,7 +121,7 @@ public class FrontEndDeveloperTests {
         }
 
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend(); //create a backend obj to test
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -142,17 +148,18 @@ public class FrontEndDeveloperTests {
             return false;
         }
 
+        System.out.println("The test passed!");
         return true;
     }
 
     /**
-     * Tests command menu
+     * Tests command menu and it's properties.
      *
-     * @return
+     * @return true if method works as expected; Else return false.
      */
     public static boolean test3() {
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend(); //create a backend obj to test
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -184,17 +191,19 @@ public class FrontEndDeveloperTests {
             return false;
         }
 
+        System.out.println("The test passed!");
         return true;
     }
 
     /**
-     * Tests filters
+     * Tests filters and it's properties.
      *
-     * @return
+     * @return true if method works as expected; Else return false.
      */
     public static boolean test4() {
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend();//create a backend obj to test
+
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -228,30 +237,37 @@ public class FrontEndDeveloperTests {
         } catch (Exception e) {
             return false;
         }
+
+        System.out.println("The test passed!");
         return true;
     }
 
     /**
      * Tests filters, years and ratings.
      *
-     * @return
+     * @return true if method works as expected; Else return false.
      */
     public static boolean test5() {
         try {
-            ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+            ShowSearcherBackend OBJECT = new ShowSearcherBackend();//create a backend obj to test
+
+
+            //create 4 new shows to test by using the show class
             Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
             Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
             Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
             Show SHOW4 = new Show("The IDK", 2000, 99, "Netflix");
 
-
+            //use the backend object to add the 4 shows
             OBJECT.addShow(SHOW1);
             OBJECT.addShow(SHOW2);
             OBJECT.addShow(SHOW3);
             OBJECT.addShow(SHOW4);
 
 
-            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT);
+            ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT); //creating a frontend object (with all its
+            //methods to test the implementation of the backend)
+
             String OUTPUT = test.outputHelper();
 
             if (OUTPUT.startsWith("Welcome to the Show Searcher App!")
@@ -266,6 +282,8 @@ public class FrontEndDeveloperTests {
 
         } catch (Exception e) {
         }
+
+        System.out.println("The test passed!");
         return true;
     }
 
@@ -274,11 +292,11 @@ public class FrontEndDeveloperTests {
      * Test looks to see that when the user enters a specific show or year they will be prompted with the correct
      * show and if not will return false.
      *
-     * @return
+     * @return true if method works as expected; Else return false.
      */
     public static boolean integrationTest1() {
 
-        ShowSearcherBackend BACKOBJECT = new ShowSearcherBackend();
+        ShowSearcherBackend BACKOBJECT = new ShowSearcherBackend(); //create a backend obj to test
         //ShowSearcherFrontend userInput = null;
 
         Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
@@ -291,7 +309,8 @@ public class FrontEndDeveloperTests {
         BACKOBJECT.addShow(SHOW3);
         BACKOBJECT.addShow(SHOW4);
 
-        ShowSearcherFrontend test = new ShowSearcherFrontend(BACKOBJECT);
+        ShowSearcherFrontend test = new ShowSearcherFrontend(BACKOBJECT);//creating a frontend object (with all its
+        //methods to test the implementation of the backend)
         String OUTPUT = test.outputHelper();
 
 
@@ -304,6 +323,7 @@ public class FrontEndDeveloperTests {
             return false;
         }
 
+        System.out.println("The test passed!");
         return true;
     }
 
@@ -319,7 +339,7 @@ public class FrontEndDeveloperTests {
          */
         public static boolean integrationTest2() {
             try {
-                ShowSearcherBackend OBJECT = new ShowSearcherBackend();
+                ShowSearcherBackend OBJECT = new ShowSearcherBackend(); //create a backend obj to test
                 Show SHOW1 = new Show("The Cat", 2001, 45, "Disney+");
                 Show SHOW2 = new Show("The Dog", 2010, 90, "Hulu");
                 Show SHOW3 = new Show("The Zebra", 2016, 88, "Netflix");
@@ -332,7 +352,8 @@ public class FrontEndDeveloperTests {
                 OBJECT.addShow(SHOW4);
 
 
-                ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT);
+                ShowSearcherFrontend test = new ShowSearcherFrontend(OBJECT); //creating a frontend object (with all its
+                //methods to test the implementation of the backend)
                 String OUTPUT = test.outputHelper();
 
 
@@ -351,38 +372,90 @@ public class FrontEndDeveloperTests {
                 e.printStackTrace();
                 return false;
             }
+            System.out.println("The test passed!");
             return false;
         }
 
-     public static boolean integrationTest3() {return false;}
+    /**
+     * (Teams of 2 Test) ~ Frontend testing the effectiveness of Backend
+     *
+     * Review code for the backend developer and testing its effectiveness to see that the methods from the backend
+     * properly function
+     *
+     * @return true if method works as expected; Else return false.
+     */
+    public static boolean integrationTest3() {
 
-    public static boolean integrationTest4() {return false;}
+            ShowSearcherBackend BACKENDOBJ = new ShowSearcherBackend(); //create a backend obj to test
+
+         Show show1 = new Show("The Cat", 2020, 99, "Disney+");
+         Show show2 = new Show("The Dog", 2015, 45, "Hulu");
+         Show show3 = new Show("The Zebra", 2013, 78, "Netflix");
+
+         BACKENDOBJ.addShow(show1);
+         BACKENDOBJ.addShow(show2);
+         BACKENDOBJ.addShow(show3);
+
+         if (BACKENDOBJ.searchByTitleWord("Cat").size() != 1) {
+             return false;
+         }
+
+         if (!BACKENDOBJ.searchByTitleWord("Dog").get(0).equals(show3)) {
+             return false;
+         }
+
+        System.out.println("The test passed!");
+         return true;
+     }
+
+    /**
+     * (Teams of 2 Test) ~ Frontend testing the effectiveness of Backend
+     *
+     * Review code for the backend developer and testing its effectiveness to see that the methods from the backend
+     * properly function
+     *
+     * @return true if method works as expected; Else return false.
+     */
+    public static boolean integrationTest4() {
+        ShowSearcherBackend BACKENDOBJ = new ShowSearcherBackend(); //create a backend obj to test
+
+        Show show1 = new Show("The Cat", 2020, 99, "Disney+");
+        Show show2 = new Show("The Dog", 2015, 45, "Hulu");
+        Show show3 = new Show("The Zebra", 2013, 78, "Netflix");
+
+        BACKENDOBJ.addShow(show1);
+        BACKENDOBJ.addShow(show2);
+        BACKENDOBJ.addShow(show3);
+
+        if (BACKENDOBJ.searchByYear(2020).size() != 2) {
+            return false;
+        }
+        // now set Netflix as the only provider
+        BACKENDOBJ.setProviderFilter("Disney+", false);
+        BACKENDOBJ.setProviderFilter("Hulu", false);
+        BACKENDOBJ.setProviderFilter("Prime Video", false);
+        BACKENDOBJ.setProviderFilter("Netflix", true);
+
+
+        if (BACKENDOBJ.searchByYear(2020).size() != 1) {
+            return false;
+        }
+
+        System.out.println("The test passed!");
+        return true;
+    }
+
 
 
 
     public static void main(String args[]){
-        //System.out.println("Test1: " + test1());
+        System.out.println("Test1: " + test1());
         //System.out.println("Test2: " + test2());
         //System.out.println("Test3: " + test3());
         //System.out.println("Test4: " + test4());
         //System.out.println("Test5: " + test5());
-        System.out.println("Integration Test 1: " + integrationTest1());
+        //System.out.println("Integration Test 1: " + integrationTest1());
         //System.out.println("Integration Test 2: " + integrationTest2());
 
-
-            /**
-             * }else if (Show.getTitle() == "The Walking Dead" ||
-             *                     Show.getTitle() == "Stranger Things" ||
-             *                     Show.getTitle() == "Black Mirror" ||
-             *                     Show.getTitle() == "Breaking Bad") {
-             *
-             *             }else if (Show.getRating() == 93 || Show.getRating() == 96
-             *                     || Show.getRating() == 92 || Show.getRating() == 100) {
-             *
-             *             }else if (Show.isAvailableOn(provider1) == true
-             *                     || .isAvailableOn(provider2) == true
-             *                     || .isAvailableOn(provider3) == true
-             *                     || .isAvailableOn(provider4) == true){
-             */
     }
 }
