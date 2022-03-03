@@ -24,14 +24,13 @@ import java.util.Scanner;
 public class ShowSearcherFrontend implements IShowSearcherFrontend {
 
 
-
-    private ShowSearcherBackend INFO;
+    public static ShowSearcherBackend INFO;
     private Integer YEARINPUT;
     private String TITLEINPUT;
     private String FILTERINPUT;
     private String DETAIl;
     private String OUT;
-    private Scanner scan = new Scanner(System.in); //scanner
+    public Scanner scan = new Scanner(System.in); //scanner
 
     ByteArrayOutputStream OUTPUT;
     InputStream systemIn;
@@ -45,9 +44,10 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
 
     /**
      * Constructor that passes IShowSearcherBackend as well as reads the user input.
-     * @param IShow
+     *
+     * @param INFO
      */
-    public ShowSearcherFrontend(IShowSearcherBackend IShow){
+    public ShowSearcherFrontend(ShowSearcherBackend INFO) {
 
         this.INFO = INFO;
         runCommandLoop(); //loop for specified commands
@@ -57,18 +57,16 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
 
     /**
      * Reads input from String.
+     *
      * @param testShow
      * @param IShowSearcherBackend
      */
-    public ShowSearcherFrontend(String testShow, IShow IShowSearcherBackend){
+    public ShowSearcherFrontend(String testShow, IShow IShowSearcherBackend) {
 
-        this.INFO = INFO; //backend object
 
         systemIn = System.in; //Takes the systems input
         systemOut = System.out; //Displays the systems output
         systemErr = System.err; //Will display the error output
-
-
 
 
         System.setIn(new ByteArrayInputStream(testShow.getBytes())); //assigns the standard input stream in byte format
@@ -76,9 +74,6 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
         runCommandLoop(); //runs the command loop
 
     }
-
-
-
 
 
     @Override
@@ -101,93 +96,86 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
         //command prompt
         while (scan.hasNext()) {
 
-            selection = "" + scan.nextLine(); //takes in the users input
 
-            //If the users input == 1 or t then it will provide the user a prompt to
-            //choose a word that they would like to search for
-            if (selection.equals("1") || selection.equals("t") || selection.equals("T") ||
-                    selection.equals("title") || selection.equals("Title")) {
-                System.out.println("Choose a word that you would like to search for: ");
+        selection = "" + scan.nextLine(); //takes in the users input
 
-                //takes in the users input for the title they would like to search
-                TITLEINPUT = scan.nextLine();
-                try {
-                    titleSearch();
-                } catch (Exception e) {
-                    System.out.println("Found " + 0 + "/" + INFO.getNumberOfShows() + " matches");
-                }
-                displayCommandMenu();
-            }
+        //If the users input == 1 or t then it will provide the user a prompt to
+        //choose a word that they would like to search for
+        if (selection.equals("1") || selection.equals("t") || selection.equals("T") ||
+                selection.equals("title") || selection.equals("Title")) {
+            System.out.println("Choose a word that you would like to search for: ");
 
-
-            //If the selection == 3 or F than it will provide the user with a list of providers
-            //It will also then display the filter helper and go through the list of options for shows
-            if (selection.equals("3") || selection.equals("f") || selection.equals("F") ||
-                    selection.equals("filter") || selection.equals("Filter")) {
-                System.out.println("Providers that shows are being searched for: ");
-                filterHELPER(); //calls filter helper to display providers more conveniently
-
-                //takes in the users next input and see's what selection they'll make
-                while (scan.hasNext()) {
-
-                    FILTERINPUT = "" + scan.nextLine().toLowerCase();
-
-                    if (FILTERINPUT.equals("n") || FILTERINPUT.equals("1")) {
-                        INFO.toggleProviderFilter("Netflix"); //backend method to toggle through methods
-                        filterHELPER();
-                    } else if (FILTERINPUT.equals("h") || FILTERINPUT.equals("2")) {
-                        INFO.toggleProviderFilter("Hulu");
-                        filterHELPER();
-                    } else if (FILTERINPUT.equals("p") || FILTERINPUT.equals("3")) {
-                        INFO.toggleProviderFilter("Prime Video");
-                        filterHELPER();
-                    } else if (FILTERINPUT.equals("d") || FILTERINPUT.equals("4")) {
-                        INFO.toggleProviderFilter("Disney Plus");
-                        filterHELPER();
-                    }
-                }
-
-            }
-
-
-            //if the users input == 2 or Y then it will search the year and ask them to search for which year they're
-            //looking for
-            if (selection.equals("2") || selection.equals("y") || selection.equals("Y") ||
-                    selection.equals("year") || selection.equals("Year")) {
-                System.out.println("Choose a year that you would like to search for: ");
-
-            try {
-                YEARINPUT = scan.nextInt();
-                yearSearch();
-                if (INFO.searchByYear(YEARINPUT).size() == 0) {
-                    System.out.println("Found " + 0 + "/ " + INFO.getNumberOfShows() + " matches");
-                }
-
-            } catch (NoSuchElementException e) {
-                System.out.println("Found " + 0 + "/" + INFO.getNumberOfShows() + " matches");
-            }
+            //takes in the users input for the title they would like to search
+            titleSearch();
             displayCommandMenu();
         }
 
 
-            //If the selection is 4 or quit then the interface will close
-            if (selection.equals("4") || selection.equals("q") || selection.equals("Q") ||
-                    selection.equals("quit") || selection.equals("Quit")) {
-
-                System.out.println("Are you sure you would like to quit? (Y/N)");
-
-
-                String newSelection = scan.nextLine();
-
-                if (newSelection.equals("Y") || newSelection.equals("y")) {
-                    System.exit(0); //exits the program
-                } else if (newSelection.equals("N") || newSelection.equals("n")) {
-                    displayCommandMenu();
-                }
-            }
-
+        //if the users input == 2 or Y then it will search the year and ask them to search for which year they're
+        //looking for
+        if (selection.equals("2") || selection.equals("y") || selection.equals("Y") ||
+                selection.equals("year") || selection.equals("Year")) {
+            System.out.println("Choose a year that you would like to search for: ");
+            yearSearch();
+            displayCommandMenu();
         }
+
+        if (INFO.searchByYear(YEARINPUT).size() == 0) {
+            System.out.println("Found " + 0 + "/ " + INFO.getNumberOfShows() + " matches");
+            displayCommandMenu();
+        }
+
+
+        //If the selection == 3 or F than it will provide the user with a list of providers
+        //It will also then display the filter helper and go through the list of options for shows
+        if (selection.equals("3") || selection.equals("f") || selection.equals("F") ||
+                selection.equals("filter") || selection.equals("Filter")) {
+            System.out.println("Providers that shows are being searched for: ");
+            filterHELPER(); //calls filter helper to display providers more conveniently
+
+            //takes in the users next input and see's what selection they'll make
+
+
+            FILTERINPUT = "" + scan.nextLine().toLowerCase();
+
+            if (FILTERINPUT.equals("n") || FILTERINPUT.equals("1")) {
+                INFO.toggleProviderFilter("Netflix"); //backend method to toggle through methods
+                filterHELPER();
+            } else if (FILTERINPUT.equals("h") || FILTERINPUT.equals("2")) {
+                INFO.toggleProviderFilter("Hulu");
+                filterHELPER();
+            } else if (FILTERINPUT.equals("p") || FILTERINPUT.equals("3")) {
+                INFO.toggleProviderFilter("Prime Video");
+                filterHELPER();
+            } else if (FILTERINPUT.equals("d") || FILTERINPUT.equals("4")) {
+                INFO.toggleProviderFilter("Disney Plus");
+                filterHELPER();
+            } else if (FILTERINPUT.equals("5") || FILTERINPUT.equals("Q") || FILTERINPUT.equals("q")) {
+                displayCommandMenu();
+
+            }
+        }
+
+
+        //If the selection is 4 or quit then the interface will close
+        if (selection.equals("4") || selection.equals("q") || selection.equals("Q") ||
+                selection.equals("quit") || selection.equals("Quit")) {
+
+            System.out.println("Are you sure you would like to quit? (Y/N)");
+
+
+            String newSelection = scan.nextLine();
+
+            if (newSelection.equals("Y") || newSelection.equals("y")) {
+                System.exit(0); //exits the program
+            } else if (newSelection.equals("N") || newSelection.equals("n")) {
+                displayCommandMenu();
+            }
+        }
+
     }
+
+}
 
 
 
@@ -213,13 +201,14 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
      * This method will display a list of shows
      */
     public void displayShows(List<IShow> shows) {
+
         int i = 1;
-        System.out.println("Found " + shows.size() + "/" + INFO.getNumberOfShows() + "matches.");
+        System.out.println("Found " + shows.size() + "/" + INFO.getNumberOfShows() + " matches.");
         for(IShow show: shows) {
 
             DETAIl = "";
             DETAIl += (i + ". " + show.getTitle() + "\n");
-            DETAIl += ("\t\t" + show.getRating() + "/100 (" + show.getYear() + ") on:");
+            DETAIl += ("\t\t" + show.getRating() + "/100 (" + show.getYear() + ") on: ");
 
             if (show.isAvailableOn("Netflix")){
                 DETAIl += "Netflix, ";}
@@ -231,12 +220,12 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
                 DETAIl += "Disney+, ";
             }
 
-            DETAIl = DETAIl.substring(0, DETAIl.length() - 2);
+            DETAIl = DETAIl.substring(0, DETAIl.length());
             DETAIl += "\n";
             System.out.println(DETAIl);
             i++;
     }
-        
+
 
     }
 
@@ -292,10 +281,11 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
         try {
             OUT = systemErr.toString() + systemOut.toString();
             return OUT;
+
         } finally {
 
-            System.err.close();
             System.setIn(systemIn);
+            System.err.close();
             System.setOut(systemOut);
 
         }
@@ -309,7 +299,7 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
      */
     public void titleSearch() {
 
-        this.TITLEINPUT = TITLEINPUT;
+        TITLEINPUT = scan.next();
         displayShows(INFO.searchByTitleWord(TITLEINPUT));
 
     }
@@ -320,8 +310,9 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
      */
     public void yearSearch() {
 
+        YEARINPUT = scan.nextInt();
         this.YEARINPUT = YEARINPUT;
-        displayShows(INFO.searchByYear(YEARINPUT));
+        displayShows(INFO.searchByYear(YEARINPUT)); //taking a backend method to search for the year
 
     }
 
@@ -329,9 +320,7 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend {
 
     public static void main(String args[]){
 
-        ShowSearcherFrontend show = new ShowSearcherFrontend((IShowSearcherBackend) null);
-
-
-
+        ShowSearcherFrontend newShow = new ShowSearcherFrontend(INFO);
+        
     }
 }
