@@ -28,17 +28,19 @@ public class ShowSearcherBackend implements IShowSearcherBackend {
 
 
 
+  
   @Override
-  public void addShow(Show show) {
+  
+  public void addShow(IShow show1) {
     // add show to hashYear hash table
-    int year = show.getYear();
-    hashYear.add(year, show);
+    int year = show1.getYear();
+    hashYear.add(year, show1);
 
     // add show to hashTitle hash table
-    String showTitle = show.getTitle();
+    String showTitle = show1.getTitle();
     String[] wordsInTitle = showTitle.split(" ");
     for (int i = 0; i < wordsInTitle.length; i++) {
-      hashTitle.add(wordsInTitle[i].trim(), show);
+      hashTitle.add(wordsInTitle[i].trim(), show1);
     }
     numberOfShows++;
   }

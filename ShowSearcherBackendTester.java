@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +20,8 @@ public class ShowSearcherBackendTester {
     return true;
   }
 
-
+  // by default all of the providers are set to true;
+  
   public static boolean test2() {
     ShowSearcherBackend backend = new ShowSearcherBackend();
     Show show1 = new Show("Title1", 2030, 87, "Disney+");
@@ -30,10 +31,18 @@ public class ShowSearcherBackendTester {
     backend.addShow(show1);
     backend.addShow(show2);
     backend.addShow(show3);
+   
+   if (!backend.getProviderFilter("Netflix")) {
+     return false;
+   }
+       
+   if (!backend.getProviderFilter("Hulu")) {
+     return false;
+   }
+   if (!backend.getProviderFilter("Disney+")) {
+     return false;
+   }
 
-    if (backend.getNumberOfShows() != 3) {
-      return false;
-    }
     return true;
   }
 
@@ -57,6 +66,7 @@ public class ShowSearcherBackendTester {
 
     return true;
   }
+  /*
 
   public static boolean test4() {
     ShowSearcherBackend Empty_Backend = new ShowSearcherBackend();
@@ -86,14 +96,16 @@ public class ShowSearcherBackendTester {
       return false;
     }
     return true;
-  }
+    }
+    */
+  
 
 
   public static void main(String[] args) {
     System.out.println(test1());
     System.out.println(test2());
-    System.out.println(test3());
-    System.out.println(test4());
-    System.out.println(test5());
+    //System.out.println(test3());
+    //System.out.println(test4());
+    //System.out.println(test5());
   }
 }
